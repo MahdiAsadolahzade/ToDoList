@@ -11,7 +11,7 @@ A simple todo list web application built with React and utilizing the `react-bea
 - Clear completed todos.
 - Reorder todos using drag-and-drop.
 
-## Demo
+## Demo and Deployed
 
 [View Demo](https://your-demo-url-here.com)
 
@@ -46,12 +46,12 @@ Copy code
 
 4. Start the development server:
 
-npm start
+npm run dev
 
 vbnet
 Copy code
 
-The app will be available at [http://localhost:3000](http://localhost:3000).
+
 
 ## Usage
 
@@ -66,6 +66,4 @@ The app will be available at [http://localhost:3000](http://localhost:3000).
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE)
