@@ -31,23 +31,19 @@
   border-radius: 8px;
 }
 
-/*----------------------------------------------------------------*/
-/* Custom Checkbox Styles */
 .completed-text {
-    text-decoration: line-through;
-  }
-/* Hide the default checkbox */
+  text-decoration: line-through;
+}
+
 .custom-checkbox input[type="checkbox"] {
   display: none;
 }
 
-/* Style the custom checkbox container */
 .custom-checkbox .checkbox-container {
   display: flex;
   align-items: center;
 }
 
-/* Style the custom checkbox */
 .custom-checkbox label.checkbox-label {
   position: relative;
   cursor: pointer;
@@ -66,7 +62,6 @@
   transition: background-color 0.3s ease;
 }
 
-/* Style the checked custom checkbox */
 .custom-checkbox input[type="checkbox"]:checked + label.checkbox-label::before {
   background: linear-gradient(
     to bottom,
@@ -74,15 +69,16 @@
     hsl(280, 87%, 65%)
   );
   border: none;
-  content: "\2713"; /* White checkmark symbol */
+  content: "\2713";
   font-size: 16px;
   color: white;
   text-align: center;
   line-height: 20px;
 }
 
-/* Style the check icon inside the custom checkbox */
-.custom-checkbox input[type="checkbox"]:checked + label.checkbox-label::before::after {
+.custom-checkbox
+  input[type="checkbox"]:checked
+  + label.checkbox-label::before::after {
   content: "\u2713"; /* White checkmark symbol */
   position: absolute;
   top: 50%;
@@ -94,20 +90,17 @@
   transition: opacity 0.3s ease;
 }
 
-/* Hide the check icon when checkbox is not checked */
 .custom-checkbox input[type="checkbox"] + label.checkbox-label::before::after {
   content: "";
   opacity: 0;
 }
 
-/* Style the text */
 .custom-checkbox .text {
   flex-grow: 1;
-  color: #333; /* Change this color as needed */
+  color: #333;
   transition: color 0.3s ease;
 }
 
-/* Style the text when checkbox is checked */
 .custom-checkbox input[type="checkbox"]:checked + label.checkbox-label .text {
-  color: #888; /* Change this color as needed */
+  color: #888;
 }
