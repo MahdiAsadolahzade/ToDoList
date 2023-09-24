@@ -13,7 +13,7 @@ A simple todo list web application built with React and utilizing the `react-bea
 
 ## Demo and Deployed
 
-[View Site]([https://your-demo-url-here.com](https://mahdiasadolahzade.github.io/ToDoList/))
+[View Site](https://mahdiasadolahzade.github.io/ToDoList/)
 
 ## Getting Started
 
