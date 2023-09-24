@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ToDoIcons from "../assets/Icons/ToDoIcons";
 import "./ToDoBox.css";
 
 function ToDoBox({ mode }) {
-  const [todos, setTodos] = useState([]);
+  const defaultTodos = JSON.parse(localStorage.getItem("todos")) || [];
+
+  const [todos, setTodos] = useState(defaultTodos);
   const [newTodo, setNewTodo] = useState("");
   const [filter, setFilter] = useState("All");
 
@@ -32,10 +34,10 @@ function ToDoBox({ mode }) {
     }
   };
 
-  // Calculate the number of incomplete todos
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
   const incompleteTodosCount = todos.filter((todo) => !todo.completed).length;
-
-  // Filter todos based on the selected filter
   const filteredTodos = todos.filter((todo) => {
     if (filter === "Active") {
       return !todo.completed;
@@ -176,18 +178,18 @@ function ToDoBox({ mode }) {
           </button>
         </div>
 
-     <div>
-     <button
-          onClick={clearCompleted}
-          className={`ml-2 rounded-md p-2 ${
-            mode === "dark-mode"
-              ? " text-white hover:bg-red-700"
-              : " text-black hover:bg-red-400"
-          }`}
-        >
-          Clear Completed
-        </button>
-     </div>
+        <div>
+          <button
+            onClick={clearCompleted}
+            className={`ml-2 rounded-md p-2 ${
+              mode === "dark-mode"
+                ? " text-white hover:bg-red-700"
+                : " text-black hover:bg-red-400"
+            }`}
+          >
+            Clear Completed
+          </button>
+        </div>
       </div>
     </>
   );
