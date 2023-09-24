@@ -25,31 +25,25 @@ A simple todo list web application built with React and utilizing the `react-bea
 
 1. Clone the repository:
 
-git clone https://github.com/your-username/todo-list-app.git
+git clone https://github.com/MahdiAsadolahzade/ToDoList.git
 
-css
-Copy code
 
 2. Navigate to the project directory:
 
+
+
 cd todo-list-app
 
-markdown
-Copy code
 
 3. Install dependencies:
 
 npm install
 
-markdown
-Copy code
 
 4. Start the development server:
 
 npm run dev
 
-vbnet
-Copy code
 
 
 
