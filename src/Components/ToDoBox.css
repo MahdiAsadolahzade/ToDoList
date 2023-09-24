@@ -35,6 +35,17 @@
   text-decoration: line-through;
 }
 
+.todo-list .text {
+  white-space: normal;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  display: -webkit-box;
+
+  -webkit-box-orient: vertical;
+}
+
 .custom-checkbox input[type="checkbox"] {
   display: none;
 }

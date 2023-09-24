@@ -2,7 +2,9 @@ import ModeIcons from "../assets/Icons/ModeIcons";
 
 function Title({ mode, setMode }) {
   function handlemode() {
-    setMode((prevMode) => (prevMode === "dark-mode" ? "light-mode" : "dark-mode"));
+    setMode((prevMode) =>
+      prevMode === "dark-mode" ? "light-mode" : "dark-mode"
+    );
   }
 
   return (
@@ -11,8 +13,12 @@ function Title({ mode, setMode }) {
         <h1 className="text-3xl ">T O D O</h1>
       </div>
 
-      <div className={`cursor-pointer text-white ${mode==="dark-mode"?"hover:text-yellow-500":"hover:text-gray-800"}`}
-       onClick={handlemode}>
+      <div
+        className={`cursor-pointer text-white ${
+          mode === "dark-mode" ? "hover:text-yellow-500" : "hover:text-gray-800"
+        }`}
+        onClick={handlemode}
+      >
         {mode === "dark-mode" ? ModeIcons.sun : ModeIcons.moon}
       </div>
     </div>

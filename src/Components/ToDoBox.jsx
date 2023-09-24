@@ -8,6 +8,7 @@ function ToDoBox({ mode }) {
   const [todos, setTodos] = useState(defaultTodos);
   const [newTodo, setNewTodo] = useState("");
   const [filter, setFilter] = useState("All");
+  const [draggedTodo, setDraggedTodo] = useState(null);
 
   const addTodo = () => {
     if (newTodo.trim() !== "") {
@@ -34,9 +35,40 @@ function ToDoBox({ mode }) {
     }
   };
 
+  const handleDragStart = (id) => {
+    setDraggedTodo(id);
+  };
+
+  const handleDragEnd = (id) => {
+    if (draggedTodo === id) {
+      setDraggedTodo(null);
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = (id) => {
+    if (draggedTodo === null) return;
+
+    const updatedTodos = [...todos];
+    const draggedIndex = updatedTodos.findIndex(
+      (todo) => todo.id === draggedTodo
+    );
+    const droppedIndex = updatedTodos.findIndex((todo) => todo.id === id);
+
+    const [draggedTodoItem] = updatedTodos.splice(draggedIndex, 1);
+    updatedTodos.splice(droppedIndex, 0, draggedTodoItem);
+
+    setTodos(updatedTodos);
+    setDraggedTodo(null);
+  };
+
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
+
   const incompleteTodosCount = todos.filter((todo) => !todo.completed).length;
   const filteredTodos = todos.filter((todo) => {
     if (filter === "Active") {
@@ -53,7 +85,7 @@ function ToDoBox({ mode }) {
   };
 
   return (
-    <>
+    <div className="flex flex-col justify-center items-center">
       <div
         className={`p-4  rounded-lg shadow-md w-[50vw] h-[70vh] custom-overflow mx-auto ${
           mode === "dark-mode" ? "dark" : "light"
@@ -70,8 +102,10 @@ function ToDoBox({ mode }) {
               mode === "dark-mode"
                 ? "border-2 border-gray-600 bg-gray-800"
                 : "border-2 border-gray-400 bg-gray-100"
-            } focus:outline-none focus:border-blue-500 ${
-              mode === "dark-mode" ? "text-white" : "text-black"
+            } focus:outline-none  ${
+              mode === "dark-mode"
+                ? "text-white focus:border-blue-500"
+                : "text-black focus:border-teal-700 "
             }`}
           />
         </div>
@@ -80,11 +114,16 @@ function ToDoBox({ mode }) {
           {filteredTodos.map((todo) => (
             <div
               key={todo.id}
-              className={`mb-1 p-3 rounded-md ${
+              className={`mb-1 p-3 rounded-md  ${
                 mode === "dark-mode"
                   ? "bg-gray-800 text-white border-2 border-sky-500 "
-                  : "bg-gray-100 border-2 border-gray-400"
+                  : "bg-gray-100 border-2 border-gray-500"
               } flex items-center justify-between`}
+              draggable="true"
+              onDragStart={() => handleDragStart(todo.id)}
+              onDragEnd={() => handleDragEnd(todo.id)}
+              onDragOver={handleDragOver}
+              onDrop={() => handleDrop(todo.id)}
             >
               <div
                 className={`custom-checkbox ${
@@ -108,12 +147,14 @@ function ToDoBox({ mode }) {
                   }`}
                 ></label>
               </div>
-              <div className={`text ${todo.completed ? "completed-text" : ""}`}>
+              <div
+                className={`text   ${todo.completed ? "completed-text" : ""}`}
+              >
                 {todo.text}
               </div>
               <button
                 onClick={() => deleteTodo(todo.id)}
-                className={` text-[#494C6B]  hover:text-red-700`}
+                className={` text-[#494C6B]  hover:text-red-600 hover:font-bold `}
               >
                 {ToDoIcons.cross}
               </button>
@@ -191,7 +232,8 @@ function ToDoBox({ mode }) {
           </button>
         </div>
       </div>
-    </>
+      <div className={`mt-3 text-gray-400`}>Drag and drop to reorder list</div>
+    </div>
   );
 }
 
